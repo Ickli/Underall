@@ -14,13 +14,13 @@
         "outputPath": "/home/boogly/Documents/gamedev/Underall/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "/home/boogly/Documents/gamedev/nuget.config",
           "/home/boogly/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/home/boogly/.nuget/NuGet/NUnit.3.13.3/NUnit.3.13.3.nupkg": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,9 +43,29 @@
               "target": "Package",
               "version": "[3.8.1.303, )"
             },
+            "MonoGame.Extended": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "MonoGame.Extended.Animations": {
+              "target": "Package",
+              "version": "[3.7.0, )"
+            },
+            "MonoGame.Extended.Entities": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "MonoGame.Extended.Input": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
             }
           },
           "imports": [
@@ -58,12 +78,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.16, 6.0.16]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.113/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.116/RuntimeIdentifierGraph.json"
         }
       }
     }

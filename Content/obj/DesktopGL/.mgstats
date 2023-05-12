@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/boogly/Documents/gamedev/Underall/Content/kindpng_988229.png","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/kindpng_988229.xnb","TextureProcessor","Texture2DContent",365740,3542005,0.1686178
+"/home/boogly/Documents/gamedev/Underall/Content/Sprites.spritefont","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Sprites.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21535,0.1635949
