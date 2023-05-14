@@ -1,30 +1,59 @@
 using System;
+// using System.Drawing;
 using Microsoft.Xna.Framework;
 
 namespace Underall.Components;
 
-public class CPosition: IComparable
+public class CSizePosition : IComparable
 {
-    public Vector2 Vector;
+    public Vector2 Location;
+    public int Width;
+    public int Height;
     public int Depth;
-    
 
-    public CPosition(Vector2 vector, int depth)
+
+    // public CSizePosition(Vector2 location, Vector2 dimensions, int depth)
+    // {
+    //     Location = location;
+    //     Width = (int)dimensions.X;
+    //     Height = (int)dimensions.Y;
+    //     Depth = depth;
+    // }
+    //
+    // public CSizePosition(Vector2 location, int width, int height, int depth)
+    // {
+    //     Location = location;
+    //     Width = width;
+    //     Height = height;
+    //     Depth = depth;
+    // }
+
+    public bool Intersects(CSizePosition anotherComponent)
     {
-        Vector = vector;
-        Depth = depth;
+        var points = GetCorners();
+        var otherPoints = anotherComponent.GetCorners();
+
+        return points[3].Y < otherPoints[0].Y || otherPoints[3].Y < points[0].Y ||
+               points[3].X < otherPoints[0].X || otherPoints[3].X < points[0].X;
     }
 
     public int CompareTo(object obj)
     {
-        if (obj is not CPosition anotherComponent)
-            throw new ArgumentException("The object is not an CSizeAndPosition");
+        if (obj is not CSizePosition anotherComponent)
+            throw new ArgumentException("The object is not a CSizePosition");
         return Depth.CompareTo(anotherComponent.Depth);
     }
-}
 
-public class CHitbox
-{
-    public int Width;
-    public int Height;
+
+    /// <returns>array of points: top-left, top-right, bottom-right, bottom-left</returns>
+    public Point[] GetCorners()
+    {
+        return new[]
+        {
+            new Point((int)Location.X, (int)Location.Y), // top left
+            new Point((int)(Location.X + Width), (int)Location.Y), // top right
+            new Point((int)(Location.X + Width), (int)(Location.Y + Height)), // bottom right
+            new Point((int)Location.X, (int)(Location.Y + Height)), // bottom left
+        };
+    }
 }
