@@ -33,8 +33,8 @@ public class CSizePosition : IComparable
         var points = GetCorners();
         var otherPoints = anotherComponent.GetCorners();
 
-        return points[3].Y < otherPoints[0].Y || otherPoints[3].Y < points[0].Y ||
-               points[3].X < otherPoints[0].X || otherPoints[3].X < points[0].X;
+        return points[2].Y < otherPoints[0].Y || otherPoints[2].Y < points[0].Y ||
+               points[2].X < otherPoints[0].X || otherPoints[2].X < points[0].X;
     }
 
     public int CompareTo(object obj)

@@ -11,7 +11,7 @@ public static class PathHelper
     private static readonly string _configFileName = "game_config.json";
     public static char PathSeparator => Path.DirectorySeparatorChar;
     
-    private static readonly string ParentDirectory = new DirectoryInfo(".").FullName;
+    private static readonly string ParentDirectory = new DirectoryInfo("./../../..").FullName;
     private static readonly string SavesDirectory = Path.Combine(ParentDirectory, _saveFolderName);
     public static readonly string ConfigFullPath = Path.Combine(ParentDirectory, _configFileName);
     
