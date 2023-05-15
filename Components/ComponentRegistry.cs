@@ -24,11 +24,10 @@ public static class ComponentRegistry
     private static int _maxComponentsCount = 32;
     public static bool IsInitialized = false;
     
-    public static void InitializeComponentMappers(World world)
+
+    public static void InitializeComponentMappers(ComponentManager manager)
     {
         IsInitialized = true;
-        var manager =
-            ReflectionHelper.GetPrivateProperty<MonoGame.Extended.Entities.World, ComponentManager>(world, "ComponentManager");
 
         #region SizeAndPositionComponents
         InitializeMapper(manager, new CSizePosition());
@@ -50,6 +49,16 @@ public static class ComponentRegistry
     
     // These mappers are shared between ComponentRegistry and ComponentManager of current world
     public static List<ComponentMapper> Mappers = new List<ComponentMapper>();
+    
+    private static readonly int _cSizePositionMapperIndex = 0;
+    
+    public static Type[] GetTypes()
+    {
+        var array = new Type[TypesAmount];
+        for (var i = 0; i < TypesAmount; i++)
+            array[i] = Mappers[i].ComponentType;
+        return array;
+    }
 
     public static void AssertComponentsCountUnderOrEqual32()
     {
@@ -68,10 +77,10 @@ public static class ComponentRegistry
 
     
     /// <summary>
-    /// Makes up deserialized fileNames and dimension parameters into Sprite object
+    /// Makes up deserialized fileNames and dimension parameters into Sprite/AnimatedSprite object
     /// and bounds it to component
     /// </summary>
-    public static void BoundTexturesFromSpriteComponents(ComponentManager componentManager, ContentManager contentManager)
+    public static void BoundTexturesToSpriteComponents(ComponentManager componentManager, ContentManager contentManager)
     {
         var cSprites = componentManager.GetMapper<CSprite>().Components;
         var cAnimatedSprites = componentManager.GetMapper<CAnimatedSprite>().Components;

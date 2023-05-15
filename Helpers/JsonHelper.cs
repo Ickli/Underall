@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using MonoGame.Extended.Collections;
@@ -12,16 +13,26 @@ namespace Underall.Helpers;
 
 public static class JsonHelper
 {
-    public static LevelInfo ParseLevelInfo(string path)
+    public static JsonSerializerOptions DefaultSerializerOptions = new JsonSerializerOptions
     {
-        // TODO
-        throw new NotImplementedException();
+        AllowTrailingCommas = true,
+        IncludeFields = true,
+    };
+
+    public static JsonDocumentOptions DefaultDocumentOptions = new JsonDocumentOptions
+    {
+        AllowTrailingCommas = true,
+    };
+
+    public static T Deserialize<T>(string filePath)
+    {
+        using var fileStream = File.Open(filePath, FileMode.Open);
+        return JsonSerializer.Deserialize<T>(fileStream, DefaultSerializerOptions);
     }
 
-    public static SaveInfo ParseSaveInfo(string path)
+    public static string Serialize<T>(T value)
     {
-        // TODO: SaveInfo class is not implemented too
-        throw new NotImplementedException();
+        return JsonSerializer.Serialize(value, DefaultSerializerOptions);
     }
     
     /// <summary>
@@ -36,15 +47,7 @@ public static class JsonHelper
         // componentBits: true at index X means that entity has component with X id
         ComponentRegistry.AssertComponentsCountUnderOrEqual32();
         var array = new JsonArray();
-        // for(var componentId = 0; componentId < ComponentRegistry.TypesAmount; componentId++)
-        // {
-        //     var dynamicMapper = (dynamic)rawMappers[componentId];
-        //     array.Add(
-        //         componentBits[componentId] ? // if componentBits have a component
-        //             JsonSerializer.SerializeToNode((object)dynamicMapper.Get(entityId), options)  // add component to array
-        //             : null // else, add null
-        //     );
-        // }
+        
         for (var componentId = 0; componentId < ComponentRegistry.TypesAmount; componentId++)
         {
             var dynamicMapper = (dynamic)rawMappers[componentId];
@@ -67,16 +70,21 @@ public static class JsonHelper
     {
         var array = new JsonArray();
         for (var entId = 0; entId < entitiesAlive.Length; entId++)
-            array.Add(GetComponentsSerialized(rawMappers, entityManager.GetComponentBits(entId), entId, options));
+            array.Add(
+                entitiesAlive[entId] ?
+                    GetComponentsSerialized(rawMappers, entityManager.GetComponentBits(entId), entId, options)
+                    : null
+                );
         return array;
     }
+
+
+    /// <returns>Either array or a single element stored in file</returns>
+    public static JsonDocument GetJsonDocument(string filePath, JsonDocumentOptions documentOptions)
+    {
+        using var fileStream = File.Open(filePath, FileMode.Open);
+        return JsonDocument.Parse(fileStream, documentOptions);
+    }
+
+    public static ConfigInfo GetGameConfig() => Deserialize<ConfigInfo>(PathHelper.ConfigFullPath);
 }
-
-
-/*
-for (var e = 0; e < entites.Count; e++)
-    for(var m = 0; m < mappers.Count; m++)
-        if (m.hasEntity(e))
-        eComponents.Add(m[e].ParseToNode)
-
-*/
