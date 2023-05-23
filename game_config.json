@@ -1,6 +1,39 @@
 {
   "PositiveVelocityLimit": 10,
   "NegativeVelocityLimit": -10,
-  "ControllablePositiveVelocityLimit": 10,
-  "ControllableNegativeVelocityLimit": -10
+  "DefaultLayeredGridDepth": 3,
+  "EpsilonVelocity": 1,
+  "HealthBarBuilder": {
+    "SpriteFontName": "DefaultSpriteFont",
+    "LerpBar" : {
+      "TextureName": "healthbar",
+      "Position": {"X": 10, "Y":  10},
+      "Scale": {"X": 1, "Y": 1},
+      "MinMaxColors": [{"B":0,"G":255,"R":0,"A":255}, {"B":0,"G":0,"R":255,"A":255}]
+    },
+    "IndicatorScale": {"X": 1, "Y": 1},
+    "IndicatorColor": {"B":100,"G":100,"R":150,"A":255}
+  },
+  "SanityBarBuilder": {
+    "SpriteFontName": "DefaultSpriteFont",
+    "LerpBar" : {
+      "TextureName": "healthbar",
+      "Position": {"X": 10, "Y":  70},
+      "Scale": {"X": 1, "Y": 1},
+      "MinMaxColors": [{"B":0,"G":255,"R":0,"A":255}, {"B":0,"G":0,"R":255,"A":255}]
+    },
+    "IndicatorScale": {"X": 1, "Y": 1},
+    "IndicatorColor": {"B":100,"G":100,"R":150,"A":255}
+  },
+  "StaminaBarBuilder": {
+    "SpriteFontName": "DefaultSpriteFont",
+    "LerpBar" : {
+      "TextureName": "healthbar",
+      "Position": {"X": 10, "Y":  130},
+      "Scale": {"X": 1, "Y": 1},
+      "MinMaxColors": [{"B":0,"G":255,"R":0,"A":255}, {"B":0,"G":0,"R":255,"A":255}]
+    },
+    "IndicatorScale": {"X": 1, "Y": 1},
+    "IndicatorColor": {"B":100,"G":100,"R":150,"A":255}
+  }
 }

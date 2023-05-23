@@ -9,18 +9,18 @@ namespace Underall.Components;
 
 public class CAnimatedSprite
 {
-    public string SpriteSheetName;
+    public string[] SpriteSheetNames;
     [JsonIgnore]
-    public AnimatedSprite Sprite;
+    public AnimatedSprite[] Sprites;
 }
 
 public class CSprite
 {
-    public string TextureName;
-    public int X;
-    public int Y;
-    public int Width;
-    public int Height;
+    public string[] TextureNames;
+    public int[] Xs;
+    public int[] Ys;
+    public int[] Widths;
+    public int[] Heights;
     [JsonIgnore]
-    public Sprite Sprite;
+    public Sprite[] Sprites;
 }

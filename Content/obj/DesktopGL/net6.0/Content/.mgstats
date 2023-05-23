@@ -1,3 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/boogly/Documents/gamedev/Underall/Content/kindpng_988229.png","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/kindpng_988229.xnb","TextureProcessor","Texture2DContent",365740,3542005,0.2894659
-"/home/boogly/Documents/gamedev/Underall/Content/Sprites.spritefont","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/Sprites.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21535,0.2013607
+"/home/boogly/Documents/gamedev/Underall/Content/back.jpeg","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/back.xnb","TextureProcessor","Texture2DContent",6127,120725,0.1145811
+"/home/boogly/Documents/gamedev/Underall/Content/DefaultSpriteFont.spritefont","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/DefaultSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21535,0.4313816
+"/home/boogly/Documents/gamedev/Underall/Content/gradsphere.png","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/gradsphere.xnb","TextureProcessor","Texture2DContent",590317,5760085,0.1239669
+"/home/boogly/Documents/gamedev/Underall/Content/healthbar.png","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/healthbar.xnb","TextureProcessor","Texture2DContent",15245,40085,0.0641516
+"/home/boogly/Documents/gamedev/Underall/Content/kindpng_988229.png","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/kindpng_988229.xnb","TextureProcessor","Texture2DContent",365740,3542005,0.0720308
+"/home/boogly/Documents/gamedev/Underall/Content/Sprites.spritefont","/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/Sprites.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21535,0.2309362

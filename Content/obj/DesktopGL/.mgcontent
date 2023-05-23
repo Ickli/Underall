@@ -4,10 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>/home/boogly/Documents/gamedev/Underall/Content/back.jpeg</File>
+    <File>/home/boogly/Documents/gamedev/Underall/Content/DefaultSpriteFont.spritefont</File>
+    <File>/home/boogly/Documents/gamedev/Underall/Content/gradsphere.png</File>
+    <File>/home/boogly/Documents/gamedev/Underall/Content/healthbar.png</File>
     <File>/home/boogly/Documents/gamedev/Underall/Content/kindpng_988229.png</File>
     <File>/home/boogly/Documents/gamedev/Underall/Content/Sprites.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

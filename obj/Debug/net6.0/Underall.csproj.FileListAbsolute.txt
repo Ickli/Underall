@@ -31,3 +31,7 @@
 /home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/kindpng_988229.xnb
 /home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/Sprites.xnb
 /home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/MonoGame.Extended.Input.dll
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/back.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/gradsphere.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/DefaultSpriteFont.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/healthbar.xnb

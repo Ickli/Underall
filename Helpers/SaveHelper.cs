@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -30,19 +31,22 @@ public static class SaveHelper
     private static bool[] FetchEntitiesAlive(EntityManager entityManager)
     {
         var entities = ReflectionHelper.GetPrivateField<EntityManager, Bag<Entity>>(entityManager, "_entityBag");
-        var removed = ReflectionHelper.GetPrivateField<EntityManager, Bag<int>>(entityManager, "_removedEntities").ToHashSet();
+        var removed = ReflectionHelper.GetPrivateField<EntityManager, Bag<int>>(entityManager, "_removedEntities");
 
-        var fetched = entities.Select(e => !removed.Contains(e.Id)).ToArray();
+        var fetched = new bool[entities.Count];
+        Array.Fill(fetched, true);
+        for (var e = 0; e < removed.Count; e++)
+            fetched[removed[e]] = false;
 
         return fetched;
     }
 
-    private static JsonArray GetJsonArrayFromEntities(World world)
+    private static string GetJsonStringFromEntities(World world)
     {
         var entityManager = ReflectionHelper.GetPrivateProperty<World, EntityManager>(world, "EntityManager");
         var entitiesAlive = FetchEntitiesAlive(entityManager);
         return JsonHelper.GetAllEntitiesComponentsSerialized(entityManager, ComponentRegistry.Mappers, entitiesAlive,
-            new JsonSerializerOptions { IncludeFields = true });
+            JsonHelper.DefaultSerializerOptions).ToJsonString();
     }
 
     public static void LoadSaveInfoWithDefaultOptions(World world, string saveInfoPath)
@@ -53,46 +57,53 @@ public static class SaveHelper
         JsonSerializerOptions serializerOptions)
     {
         var cTypes = ComponentRegistry.GetTypes();
-        var cMappers = ComponentRegistry.Mappers;
+        var cMappers = ComponentRegistry.Mappers.ToArray();
 
-        using var jsonEntities = JsonHelper.GetJsonDocument(saveInfoPath, documentOptions).RootElement.EnumerateArray();
-        foreach (var jsonEntity in jsonEntities)
-            LoadEntityFromJsonElement(world, jsonEntity, cTypes, cMappers.ToArray(), serializerOptions);
+        using var jsonDoc = JsonHelper.GetJsonDocument(saveInfoPath, documentOptions);
+        var jsonEntities = jsonDoc.RootElement;
+        var entitiesCount = jsonEntities.GetArrayLength();
+        var nullEntities = new List<int>();
+        
+        // load every entity regardless of whether it's null or not
+        for (var entId = 0; entId < entitiesCount; entId++)
+            if(LoadEntityFromJsonElement(world, jsonEntities[entId], cTypes, cMappers, serializerOptions) == -1)
+                nullEntities.Add(entId);
+        
+        // destroy every null entity
+        for(var index = 0; index < nullEntities.Count; index++)
+            world.DestroyEntity(nullEntities[index]);
     }
 
-    private static void LoadEntityFromJsonElement(World world, JsonElement entity, Type[] cTypes, ComponentMapper[] cMappers, 
+    /// <summary>
+    /// Loads components of an entity from JsonElement.
+    /// </summary>
+    /// <returns>Id of loaded entity, -1 if null</returns>
+    private static int LoadEntityFromJsonElement(World world, JsonElement entity, Type[] cTypes, ComponentMapper[] cMappers, 
         JsonSerializerOptions serializerOptions)
     {
         var ent = world.CreateEntity();
-
         if (entity.ValueKind == JsonValueKind.Null)
-        {
-            // if valueKind is null 
-            // the entity was removed at the moment of saving
-            // so it is removed again by being destroyed
-            ent.Destroy();
-            return;
-        }
-        
+            return -1;
+
         for (var componentId = 0; componentId < cTypes.Length; componentId++)
             if (entity[componentId].ValueKind != JsonValueKind.Null)
-            {
                 // if valueKind is null
                 // the component was absent at the moment of saving
                 // so it is skipped
-                var dynMapper = cMappers[componentId] as dynamic;
-                dynMapper.Put(ent.Id, (dynamic)entity[componentId].Deserialize(cTypes[componentId], serializerOptions));
-            }
+                ((dynamic)cMappers[componentId]).Put(ent.Id, (dynamic)entity[componentId].Deserialize(cTypes[componentId], serializerOptions));
+            
+
+        return ent.Id;
     }
 
     public static LevelInfo GetLevelInfo(string saveFolderName) =>
         JsonHelper.Deserialize<LevelInfo>(PathHelper.GetFullPathToSavedLevelInfo(saveFolderName));
 
-    private static void MakeSave(World world, LevelInfo currentLevel, string saveFolderName)
+    public static void MakeSave(World world, LevelInfo currentLevel, string saveFolderName)
     {
         PathHelper.CreateSaveFolderIfNotExists(saveFolderName);
         
         PathHelper.WriteToLevelInfo(saveFolderName, JsonHelper.Serialize(currentLevel));
-        PathHelper.WriteToSaveInfo(saveFolderName, GetJsonArrayFromEntities(world).ToJsonString());
+        PathHelper.WriteToSaveInfo(saveFolderName, GetJsonStringFromEntities(world));
     }
 }

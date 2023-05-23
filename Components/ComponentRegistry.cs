@@ -22,35 +22,25 @@ public static class ComponentRegistry
 {
     // this limitation is due to technical issues in MonoGame.Extended
     private static int _maxComponentsCount = 32;
+    public static int DimensionsAmount = Enum.GetNames(typeof(Dimensions)).Length;
     public static bool IsInitialized = false;
-    
+
 
     public static void InitializeComponentMappers(ComponentManager manager)
     {
         IsInitialized = true;
 
-        #region SizeAndPositionComponents
         InitializeMapper(manager, new CSizePosition());
-        #endregion
-        
-        #region PhysicsComponents
         InitializeMapper(manager, new CVelocity());
-        #endregion
-        
-        #region SpriteAndAnimationComponents
         InitializeMapper(manager, new CAnimatedSprite());
         InitializeMapper(manager, new CSprite());
-        #endregion
-        
-        #region PlayerComponents
         InitializeMapper(manager, new CControllable());
-        #endregion
+        InitializeMapper(manager, new CWalkableBy());
+        InitializeMapper(manager, new CBasicStats());
     }
     
     // These mappers are shared between ComponentRegistry and ComponentManager of current world
     public static List<ComponentMapper> Mappers = new List<ComponentMapper>();
-    
-    private static readonly int _cSizePositionMapperIndex = 0;
     
     public static Type[] GetTypes()
     {
@@ -80,7 +70,7 @@ public static class ComponentRegistry
     /// Makes up deserialized fileNames and dimension parameters into Sprite/AnimatedSprite object
     /// and bounds it to component
     /// </summary>
-    public static void BoundTexturesToSpriteComponents(ComponentManager componentManager, ContentManager contentManager)
+    public static void BindTexturesToSpriteComponents(ComponentManager componentManager, ContentManager contentManager)
     {
         var cSprites = componentManager.GetMapper<CSprite>().Components;
         var cAnimatedSprites = componentManager.GetMapper<CAnimatedSprite>().Components;
@@ -89,24 +79,28 @@ public static class ComponentRegistry
         for(var componentIndex = 0; componentIndex < cSprites.Count; componentIndex++)
         {
             var component = cSprites[componentIndex];
-            component.Sprite = new Sprite(
-                new TextureRegion2D(
-                    contentManager.Load<Texture2D>(component.TextureName), 
-                    component.X, 
-                    component.Y, 
-                    component.Width, 
-                    component.Height
+            if (component is null) continue;
+            component.Sprites = new Sprite[DimensionsAmount];
+            for (var dim = 0; dim < DimensionsAmount; dim++)
+                component.Sprites[dim] = new Sprite(
+                    new TextureRegion2D(
+                        contentManager.Load<Texture2D>(component.TextureNames[dim]), 
+                        component.Xs[dim], 
+                        component.Ys[dim], 
+                        component.Widths[dim], 
+                        component.Heights[dim]
                     )
                 );
         }
         
         // Bounding CAnimatedSprite
-        var jsonContentLoader = new JsonContentLoader();
+        var jsonContentLoader = JsonHelper.JsonContentLoader;
         for (var componentIndex = 0; componentIndex < cAnimatedSprites.Count; componentIndex++)
         {
             var component = cAnimatedSprites[componentIndex];
-            component.Sprite = new MonoGame.Extended.Sprites.AnimatedSprite(
-                contentManager.Load<SpriteSheet>(component.SpriteSheetName, jsonContentLoader)
+            for(var dim = 0; dim < DimensionsAmount; dim++)
+                component.Sprites[dim] = new MonoGame.Extended.Sprites.AnimatedSprite(
+                    contentManager.Load<SpriteSheet>(component.SpriteSheetNames[dim], jsonContentLoader)
                 );
         }
     }

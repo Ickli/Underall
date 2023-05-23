@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Collections;
 using MonoGame.Extended.Entities;
 using MonoGame.Extended.Sprites;
 using Underall.Components;
 using Underall.Helpers;
 using Underall.MetaInfo;
+using Underall.Systems;
 
 namespace Underall;
 
@@ -19,10 +19,14 @@ public class Game1 : Game
     private Sprite sprite;
     public int timeDif = 5;
     public Entity ent;
+    public Entity ent1;
+    private World.World World;
+    private UserInterface UserInterface;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
+        _graphics.IsFullScreen = false;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
@@ -32,10 +36,12 @@ public class Game1 : Game
         base.Initialize();
         
         var config = JsonHelper.GetGameConfig();
-        var world = new Underall.World.World(this, "test_save", config);
+        World = new Underall.World.World(this, GraphicsDevice, _spriteBatch, "test_save", config);
         
-        ent = world._World.GetEntity(0);
-        sprite = world.ComponentManager.GetMapper<CSprite>().Components[0].Sprite;
+        ent = World._World.GetEntity(0);
+        sprite = World.ComponentManager.GetMapper<CSprite>().Components[0].Sprites[0];
+        
+        InitializeUserInterface(config);
     }
 
     protected override void LoadContent()
@@ -50,14 +56,19 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-        
-        _spriteBatch.Begin();
-        
-        _spriteBatch.Draw(sprite, ent.Get<CSizePosition>().Location);
-
-        _spriteBatch.End();
-
         base.Draw(gameTime);
+        UserInterface.Draw();
+    }
+
+    // protected override void OnExiting(Object sender, EventArgs args)
+    // {
+    //     base.OnExiting(sender, args);
+    //     World.Save("test_save");
+    //     World._World.Dispose();
+    // }
+
+    private void InitializeUserInterface(ConfigInfo config)
+    {
+        UserInterface = new UserInterface(World, _spriteBatch, Content, config);
     }
 }

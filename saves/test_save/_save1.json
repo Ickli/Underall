@@ -1,0 +1,15 @@
+[
+	[{"Location":{"X":10,"Y":10},"Width":45,"Height":45,"Depth":0},
+		{"Vector":{"X":10,"Y":0}},
+		null,
+		{"TextureName":"kindpng_988229","X":0,"Y":0,"Width":45,"Height":45},
+		{}, 
+		{"IsWalkableReal": false, "IsWalkableImaginary": false}],
+	[{"Location":{"X":150,"Y":200},"Width":45,"Height":45,"Depth":0},
+		{"Vector":{"X":0,"Y":0}},
+		null,
+		{"TextureName":"kindpng_988229","X":0,"Y":0,"Width":45,"Height":45},
+		null, 
+		{"IsWalkableReal": false, "IsWalkableImaginary": false}],
+	[null,null,null,null,null, null]
+]

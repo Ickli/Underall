@@ -1,2 +1,12 @@
-{"GridWidth":10,"GridHeight":10,"GridCellWidth":50,"GridCellHeight":50,"WidthInPixels":0,"HeightInPixels":0}
-
+{
+  "CurrentLevelId": 0,
+  "CurrentDimension": 1,
+  "BackgroundFileNames": [["back", "back"]],
+  "BackgroundScales": [{"X": 5, "Y": 5},{"X": 5, "Y": 5}],
+  "GridWidths": [10, 10],
+  "GridHeights": [10, 10],
+  "GridCellWidths": [80, 80],
+  "GridCellHeights": [60, 60],
+  "WidthsInPixels": [0, 0],
+  "HeightsInPixels": [0, 0]
+}

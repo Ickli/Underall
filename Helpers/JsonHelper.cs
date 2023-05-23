@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using MonoGame.Extended.Collections;
 using MonoGame.Extended.Entities;
+using MonoGame.Extended.Serialization;
 using Underall.Components;
 using Underall.MetaInfo;
 
@@ -13,8 +14,11 @@ namespace Underall.Helpers;
 
 public static class JsonHelper
 {
+    public static JsonContentLoader JsonContentLoader = new JsonContentLoader();
+    
     public static JsonSerializerOptions DefaultSerializerOptions = new JsonSerializerOptions
     {
+        WriteIndented = true,
         AllowTrailingCommas = true,
         IncludeFields = true,
     };
