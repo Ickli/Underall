@@ -19,7 +19,12 @@ using MonoGame.Extended.Entities;
 /// </summary>
 public static class SaveHelper
 {
-
+    public static int MaxSaveCount = 10;
+    
+    public static IEnumerable<string> GetSaveNames() => Directory
+        .GetDirectories(PathHelper.SavesDirectory)
+        .Select(dir => Path.GetFileName(dir));
+    
     /// <summary>
     /// Returns bool array where true at index X means that entity with X Id is alive.
     /// </summary>

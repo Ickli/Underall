@@ -20,6 +20,7 @@ public class StatInfo
     public void ChangeCurrent(int current)
     {
         RawChangeCurrent(current);
+        CalculateCurrentProportionByInverseLerp();
         StatChanged?.Invoke();
     }
 
@@ -42,7 +43,7 @@ public class StatInfo
     }
 
     private void CalculateCurrentProportionByInverseLerp() =>
-        CurrentProportion = (Current - MinMaxLimits.X) / (CurrentProportion - MinMaxLimits.Y);
+        CurrentProportion = (Current - MinMaxLimits.X) / (MinMaxLimits.Y - MinMaxLimits.X);
 
     private void CalculateCurrentByLerp() => 
         Current = (int)(MinMaxLimits.X + CurrentProportion * (MinMaxLimits.Y - MinMaxLimits.X));

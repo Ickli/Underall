@@ -23,20 +23,20 @@ public class World
     public ComponentManager ComponentManager { get; private set; }
     public Dimensions Dimension { get; private set; }
 
-    public int ControllableEntityId; // TODO: CHANGE THIS
+    public int ControllableEntityId = 0; // TODO: CHANGE THIS
     
     public World(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, string saveFolderName, ConfigInfo config)
     {
         
         LoadLevelInfoFromFolder(saveFolderName);
-        InitializeSystems(game, graphicsDevice, spriteBatch, config); 
-        game.Components.Add(_World);
+        InitializeSystems(game, graphicsDevice, spriteBatch, config);
+        // game.Components.Add(_World);
         InitializeComponentManager();
         LoadSaveInfoFromFolder(saveFolderName);
         BoundTexturesToSpriteComponents(game.Content);
 
-        ControllableEntityId = 0;  // TODO: CHANGE THIS
         Grid = GetGridPopulatedWithCurrentEntities(config);
+        game.World = this;
     }
 
     /// <summary>

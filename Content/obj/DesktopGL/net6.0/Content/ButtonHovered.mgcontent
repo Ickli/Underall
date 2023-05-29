@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/home/boogly/Documents/gamedev/Underall/Content/ButtonHovered.wav</SourceFile>
+  <SourceTime>2023-05-28T14:49:10.825709+05:00</SourceTime>
+  <DestFile>/home/boogly/Documents/gamedev/Underall/Content/bin/DesktopGL/Content/ButtonHovered.xnb</DestFile>
+  <DestTime>2023-05-28T14:50:46.5261447+05:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2022-07-26T16:44:56+05:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

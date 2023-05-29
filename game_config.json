@@ -1,14 +1,25 @@
 {
+  "DefaultLevelName": "test_save",
+  
   "PositiveVelocityLimit": 10,
   "NegativeVelocityLimit": -10,
   "DefaultLayeredGridDepth": 3,
   "EpsilonVelocity": 1,
+  
+  "StandardRelativeFrameTextItem": {
+    "UVPosition": {"X": 0.2, "Y":  0.2},
+    "Scale": {"X": 1, "Y": 1},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "SourceName": "DefaultSpriteFont",
+    "Text": "This text is derived from StandardRelativeFrameTextItem"
+  },
+  
   "HealthBarBuilder": {
     "SpriteFontName": "DefaultSpriteFont",
     "LerpBar" : {
       "TextureName": "healthbar",
       "Position": {"X": 10, "Y":  10},
-      "Scale": {"X": 1, "Y": 1},
+      "Scale": {"X": 1, "Y": 0.5},
       "MinMaxColors": [{"B":0,"G":255,"R":0,"A":255}, {"B":0,"G":0,"R":255,"A":255}]
     },
     "IndicatorScale": {"X": 1, "Y": 1},
@@ -18,8 +29,8 @@
     "SpriteFontName": "DefaultSpriteFont",
     "LerpBar" : {
       "TextureName": "healthbar",
-      "Position": {"X": 10, "Y":  70},
-      "Scale": {"X": 1, "Y": 1},
+      "Position": {"X": 10, "Y":  40},
+      "Scale": {"X": 1, "Y": 0.5},
       "MinMaxColors": [{"B":0,"G":255,"R":0,"A":255}, {"B":0,"G":0,"R":255,"A":255}]
     },
     "IndicatorScale": {"X": 1, "Y": 1},
@@ -29,11 +40,206 @@
     "SpriteFontName": "DefaultSpriteFont",
     "LerpBar" : {
       "TextureName": "healthbar",
-      "Position": {"X": 10, "Y":  130},
-      "Scale": {"X": 1, "Y": 1},
+      "Position": {"X": 10, "Y":  70},
+      "Scale": {"X": 1, "Y": 0.5},
       "MinMaxColors": [{"B":0,"G":255,"R":0,"A":255}, {"B":0,"G":0,"R":255,"A":255}]
     },
     "IndicatorScale": {"X": 1, "Y": 1},
     "IndicatorColor": {"B":100,"G":100,"R":150,"A":255}
+  },
+  "DialogueFrame": {
+    "SourceName": "DefaultDialogueFrame",
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "TextItems": [{
+      "UVPosition": {"X": 0.5, "Y":  0.3},
+      "Scale": {"X": 1, "Y": 1},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "TODO!"
+    }],
+    "TextureItems": [{
+      "UVPosition": {"X": 0.5, "Y":  0.5},
+      "Scale": {"X": 1, "Y": 1},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "Beer"
+    }]
+  },
+
+  "MainMenuBackgroundName": "MainMenuBackground",
+  "MainMenuBackgroundScale": {"X": 0.45, "Y": 0.45},
+  "MainMenu_StartGameButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.15},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "StartNewGame",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y": 0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Start"
+    }],
+    "TextureItems": []
+  },
+  "MainMenu_LoadSaveButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.3},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "LoadSaveMenuToLoad",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y":  0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Load"
+    }],
+    "TextureItems": []
+  },
+  "MainMenu_ExitButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.45},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "Exit",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y":  0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Exit"
+    }],
+    "TextureItems": []
+  },
+
+  "LoadMenu_LongButton": {
+    "SourceName": "SaveMenu_LongButton",
+    "UVPosition": {"X":  0.05, "Y": 0.3},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "SaveMenu_LongButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "DummyFunction",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [],
+    "TextureItems": []
+  },
+
+  "LoadMenuBackgroundName": "MainMenuBackground",
+  "LoadMenuBackgroundScale": {"X": 0.45, "Y": 0.45},
+  "LoadMenuTextScale": {"X": 2, "Y": 2},
+  "LoadMenu_ReturnButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.8},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "ReturnToPreviousScreen",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y":  0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Exit"
+    }],
+    "TextureItems": []
+  },
+
+
+  "PauseMenuBackgroundName": "MainMenuBackground",
+  "PauseMenuBackgroundScale": {"X": 0.45, "Y": 0.45},
+  "PauseMenu_ReturnButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.15},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "ReturnToPreviousScreen",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y": 0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Return"
+    }],
+    "TextureItems": []
+  },
+  "PauseMenu_MakeSaveButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.30},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "LoadSaveMenuToSave",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y": 0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Save"
+    }],
+    "TextureItems": []
+  },
+  "PauseMenu_LoadSaveButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.45},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "LoadSaveMenuToLoad",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y":  0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Load"
+    }],
+    "TextureItems": []
+  },
+  "PauseMenu_ExitButton": {
+    "SourceName": "MainMenu_StartGameButton",
+    "UVPosition": {"X":  0.05, "Y": 0.6},
+    "Color": {"B":255,"G":255,"R":255,"A":255},
+    "Scale": {"X": 1, "Y": 1},
+    "OnHoverTextureName": "MainMenu_StartGameButtonHovered",
+    "OnHoverSoundEffectName": "ButtonHovered",
+    "OnClickFunctionName": "Exit",
+    "OnClickTextureName": "",
+    "OnClickSoundEffectName": "",
+    "TextItems": [{
+      "UVPosition": {"X": 0.2, "Y":  0.2},
+      "Scale": {"X": 2, "Y": 2},
+      "Color": {"B":255,"G":255,"R":255,"A":255},
+      "SourceName": "DefaultSpriteFont",
+      "Text": "Exit"
+    }],
+    "TextureItems": []
   }
 }

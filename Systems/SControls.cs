@@ -61,7 +61,7 @@ public class SControls: EntityProcessingSystem
         if (keyb.IsKeyDown(Keys.X))
         {
             var statInfo = _world.ComponentManager.GetMapper<CBasicStats>().Get(_world.ControllableEntityId);
-            Console.WriteLine(statInfo.Health.Current);
+            statInfo.Sanity.ChangeCurrent(statInfo.Sanity.Current - 5);
         }
             
     }

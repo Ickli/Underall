@@ -1,0 +1,38 @@
+SCREENS:
+--MAIN MENU--
+    Controls: [ WASD | Enter ]
+    World is not initialized
+    Systems are not initialized
+    UI draws main menu stuff
+--GAMEPLAY--
+    Controls: [ needed ones ]
+    World is initialized
+    Systems are initialized
+    Entities are loaded
+    UI draws bars, frames etc
+--PAUSE--
+    Controls: [ WASD | Enter ]
+    GameplayScreen is saved
+    UI draws pause stuff
+--CUTSCENE--
+    Controls: [ Enter ]
+    GameplayScreen is saved
+    Cutscene is played
+    After play it returns to GameplayScreen
+--END OF GAME--
+    Controls: [ Enter ]
+    Until button is pressed or time is elapsed draw EndOfGameScreen.
+    After, return to main menu.
+--Inventory--
+    Controls: [ WASD | Enter | Escape ]
+    GameplayScreen is saved,
+    UI draws inventory stuff,
+    
+
+BEFORE LOADING ANY SCREENS:
+    Load graphics stuff (spriteBatch and so on)
+    Load config
+    Initialize user interface,
+
+THOUGHTS ON CONTROLS DURING SCREENS EXCEPT GAMEPLAY:
+    Write own controls for them

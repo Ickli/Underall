@@ -35,3 +35,11 @@
 /home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/gradsphere.xnb
 /home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/DefaultSpriteFont.xnb
 /home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/healthbar.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/Beer.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/DefaultDialogueFrame.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/MainMenu_StartGameButton.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/MainMenu_StartGameButtonHovered.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/ButtonHovered.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/MainMenuBackground.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/SaveMenu_LongButton.xnb
+/home/boogly/Documents/gamedev/Underall/bin/Debug/net6.0/Content/SaveMenu_LongButtonHovered.xnb

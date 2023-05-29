@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 
 namespace Underall.Helpers;
@@ -12,13 +13,11 @@ public static class PathHelper
     public static char PathSeparator => Path.DirectorySeparatorChar;
     
     private static readonly string ParentDirectory = new DirectoryInfo("./../../..").FullName;
-    private static readonly string SavesDirectory = Path.Combine(ParentDirectory, _saveFolderName);
+    public static readonly string SavesDirectory = Path.Combine(ParentDirectory, _saveFolderName);
     public static readonly string ConfigFullPath = Path.Combine(ParentDirectory, _configFileName);
     
-    public static string GetFullPathTo(string fileName)
-    {
-        return Path.Combine(ParentDirectory, fileName);
-    }
+    public static string GetFullPathTo(string fileName) => Path.Combine(ParentDirectory, fileName);
+    
 
     private static string GetFullPathToSaveFolder(string folderName) => Path.Combine(SavesDirectory, folderName);
 
@@ -41,5 +40,4 @@ public static class PathHelper
 
     public static void WriteToLevelInfo(string saveFolderName, string content) =>
         File.WriteAllText(GetFullPathToSavedLevelInfo(saveFolderName), content);
-    
 }
