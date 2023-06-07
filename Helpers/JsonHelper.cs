@@ -15,6 +15,7 @@ namespace Underall.Helpers;
 public static class JsonHelper
 {
     public static JsonContentLoader JsonContentLoader = new JsonContentLoader();
+    public static readonly string EmptySourceName = "";
     
     public static JsonSerializerOptions DefaultSerializerOptions = new JsonSerializerOptions
     {

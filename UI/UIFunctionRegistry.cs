@@ -26,27 +26,27 @@ public static class UIFunctionRegistry
         {"DummyFunction", DummyFunction}
     };
 
-    public static void Test(UIEventArgs args) =>
+    private static void Test(UIEventArgs args) =>
         Console.WriteLine("button was clicked!");
     
-    public static void LoadMainMenuScreen(UIEventArgs args) => args.Game.LoadMainMenuScreen();
+    private static void LoadMainMenuScreen(UIEventArgs args) => args.Game.LoadMainMenuScreen();
 
-    public static void LoadPauseMenuScreen(UIEventArgs args) => args.Game.LoadPauseMenuScreen();
+    private static void LoadPauseMenuScreen(UIEventArgs args) => args.Game.LoadPauseMenuScreen();
 
-    public static void LoadSaveMenuToSave(UIEventArgs args) => args.Game.LoadSaveMenuToSave();
+    private static void LoadSaveMenuToSave(UIEventArgs args) => args.Game.LoadSaveMenuToSave();
 
-    public static void LoadSaveMenuToLoad(UIEventArgs args) => args.Game.LoadSaveMenuToLoad();
+    private static void LoadSaveMenuToLoad(UIEventArgs args) => args.Game.LoadSaveMenuToLoad();
 
-    public static void ReturnToPreviousScreen(UIEventArgs args) => args.Game.ReturnToPreviousScreen();
+    private static void ReturnToPreviousScreen(UIEventArgs args) => args.Game.ReturnToPreviousScreen();
     
-    public static void Exit(UIEventArgs args) => args.Game.Exit();
+    private static void Exit(UIEventArgs args) => args.Game.Exit();
 
-    public static void StartNewGame(UIEventArgs args) => args.Game.LoadGameplayScreen();
+    private static void StartNewGame(UIEventArgs args) => args.Game.LoadGameplayScreen();
 
-    public static void LoadSave(UIEventArgs args) => args.Game.LoadGameplayScreen(((ILabeled)args.Sender).Label);
+    private static void LoadSave(UIEventArgs args) => args.Game.LoadGameplayScreen(((ILabeled)args.Sender).Label);
 
-    public static void MakeSave(UIEventArgs args) => args.Game.World.Save(((ILabeled)args.Sender).Label);
+    private static void MakeSave(UIEventArgs args) => args.Game.World.MakeSave(((ILabeled)args.Sender).Label);
 
-    public static void DummyFunction(UIEventArgs args) => Console.WriteLine("This UI element has a dummy function that is " +
-                                                                            "to be replaced with another one");
+    private static void DummyFunction(UIEventArgs args) => Console.WriteLine("This UI element has a dummy function that is " +
+                                                                             "to be replaced with another one");
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using Underall.MetaInfo;
 
 namespace Underall.Helpers;
 
@@ -18,12 +19,11 @@ public static class PathHelper
     
     public static string GetFullPathTo(string fileName) => Path.Combine(ParentDirectory, fileName);
     
-
     private static string GetFullPathToSaveFolder(string folderName) => Path.Combine(SavesDirectory, folderName);
 
-    public static string GetFullPathToSaveInfo(string saveFolderName) =>
-        Path.Combine(GetFullPathToSaveFolder(saveFolderName), _saveInfoFileName);
-    public static string GetFullPathToSavedLevelInfo(string saveFolderName) =>
+    public static string GetFullPathToScreenInfo(string saveFolderName, LevelInfo levelInfo) =>
+        Path.Combine(GetFullPathToSaveFolder(saveFolderName), levelInfo.CurrentLevelId.ToString(), levelInfo.CurrentScreenId.ToString());
+    public static string GetFullPathToLevelInfo(string saveFolderName) =>
         Path.Combine(GetFullPathToSaveFolder(saveFolderName), _levelInfoFileName);
 
     private static void CreateFolderIfNotExists(string dir)
@@ -35,9 +35,9 @@ public static class PathHelper
     public static void CreateSaveFolderIfNotExists(string saveFolderName) => 
         CreateFolderIfNotExists(GetFullPathToSaveFolder(saveFolderName));
 
-    public static void WriteToSaveInfo(string saveFolderName, string content) =>
-        File.WriteAllText(GetFullPathToSaveInfo(saveFolderName), content);
+    public static void WriteToScreenInfo(string saveFolderName, LevelInfo levelInfo, string content) =>
+        File.WriteAllText(GetFullPathToScreenInfo(saveFolderName, levelInfo), content);
 
     public static void WriteToLevelInfo(string saveFolderName, string content) =>
-        File.WriteAllText(GetFullPathToSavedLevelInfo(saveFolderName), content);
+        File.WriteAllText(GetFullPathToLevelInfo(saveFolderName), content);
 }

@@ -74,7 +74,10 @@ public class SPhysics: EntityUpdateSystem
             }
             else UpdatePosition(time, ref cSizePosition.Location, cVelocity.Vector.X, 0);
 
-            World.Grid.TryAddEntity(cSizePosition, ent);
+            // destroys entity if it is not inside grid
+            // works only on movable objects. 
+            if(!World.Grid.TryAddEntity(cSizePosition, ent))
+                World._World.DestroyEntity(ent);
             // UpdatePosition(time, ref cSizePosition.Location, cVelocity.Vector.X, _acceleration);
             UpdateVelocity(time, ref cVelocity.Vector);
         }

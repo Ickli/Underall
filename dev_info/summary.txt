@@ -1,22 +1,23 @@
-[Summary]
+[Plan]
+INTERACTIONS
+[Done] 1. Write InteractionManager, SoundManager, SoundCache
+    1-1. Add interactions
+    1-2. Add soundEffects to interactions
+    1-3. Add InteractionManager and SoundManager
+    
+[Later] SAVING/SAVE_INFO/LEVEL_INFO
+[Done] 2. Add CMeta: CommonId, UUID
+[Done] 3. Rewrite LevelInfo/SaveInfo structure and de-serialization
+    3-1. Redefine structure of LevelInfo
+[Done] 4. Add accumulative effects to SaveInfo/LevelInfo; add flags
 
-- Жанр: 2D платформер
-
-- Основные локации: закрытые темные помещения
-
-- Первостепенная механика: Путешествие по мирам. Главный герой может переноситься в
-воображаемый/потусторонний мир. В этом мире уровни будут слегка отличаться от "реальных",
-на "воображаемых" же уровнях будут вещи и информация, необходимые для прохождения.
-Путешествие по воображаемому миру станет затруднено, если игрок будет ошибаться в реальном.
-
-- Второстепенная механика: "Живое" окружение. В зависимости от действий игрока, среда/уровень
-будет изменять себя, создавать новые существа или препятствия там, где их раньше не было.
-Таким же образом игроку может помочь. 
-
-
-[Tech stack]
-- C#/Monogame
-
-
-[Plot]
-
+SYSTEMS CHANGES DUE TO CHANGED SAVE_INFO/LEVEL_INFO
+- [semi-done] SPhysics should now work only for entities contained inside grid
+- WorldGrid should not be reinitialized after each go-out-of-sight of controllable:
+    because grids are going to be bigger than screen, so only screen position have to be updated
+    and - if and only if controllable go out of grid - the grid must be reinitialized
+GUI/GRAPHICS
+5. Study SpriteBatch's work (maybe i'll be able to throw away WorldGrid's LayeredGrid)
+6. Rewrite GUI's StatBar
+7. Place all GUI to its own configuration file
+8. Study HLSL and try to write light-sphere shaders

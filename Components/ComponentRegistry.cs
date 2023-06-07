@@ -30,6 +30,7 @@ public static class ComponentRegistry
     {
         IsInitialized = true;
 
+        InitializeMapper(manager, new CMeta());
         InitializeMapper(manager, new CSizePosition());
         InitializeMapper(manager, new CVelocity());
         InitializeMapper(manager, new CAnimatedSprite());
@@ -65,12 +66,16 @@ public static class ComponentRegistry
         return mapper;
     }
 
+    public static void BindComponentSources(ComponentManager componentManager, ContentManager contentManager)
+    {
+        BindTexturesToSpriteComponents(componentManager, contentManager);
+    }
     
     /// <summary>
     /// Makes up deserialized fileNames and dimension parameters into Sprite/AnimatedSprite object
     /// and bounds it to component
     /// </summary>
-    public static void BindTexturesToSpriteComponents(ComponentManager componentManager, ContentManager contentManager)
+    private static void BindTexturesToSpriteComponents(ComponentManager componentManager, ContentManager contentManager)
     {
         var cSprites = componentManager.GetMapper<CSprite>().Components;
         var cAnimatedSprites = componentManager.GetMapper<CAnimatedSprite>().Components;

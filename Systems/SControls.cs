@@ -58,11 +58,5 @@ public class SControls: EntityProcessingSystem
             controllableVelocity.Vector.X = Math.Min(controllableVelocity.Vector.X + _timeDif * (float)time.ElapsedGameTime.TotalMilliseconds / 10, _positiveVelocityLimit);
         if (keyb.IsKeyDown(Keys.Space))
             _world.CurrentLevel.SwitchToNextDimension();
-        if (keyb.IsKeyDown(Keys.X))
-        {
-            var statInfo = _world.ComponentManager.GetMapper<CBasicStats>().Get(_world.ControllableEntityId);
-            statInfo.Sanity.ChangeCurrent(statInfo.Sanity.Current - 5);
-        }
-            
     }
 }

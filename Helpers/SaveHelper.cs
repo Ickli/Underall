@@ -25,6 +25,9 @@ public static class SaveHelper
         .GetDirectories(PathHelper.SavesDirectory)
         .Select(dir => Path.GetFileName(dir));
     
+    // public static string GetCurrentScreenPath(LevelInfo levelInfo) =>
+        
+
     /// <summary>
     /// Returns bool array where true at index X means that entity with X Id is alive.
     /// </summary>
@@ -54,10 +57,8 @@ public static class SaveHelper
             JsonHelper.DefaultSerializerOptions).ToJsonString();
     }
 
-    public static void LoadSaveInfoWithDefaultOptions(World world, string saveInfoPath)
-    {
-        LoadSavedEntities(world, saveInfoPath, JsonHelper.DefaultDocumentOptions, JsonHelper.DefaultSerializerOptions);
-    }
+    public static void LoadSavedScreen(World world, string savedScreenPath) =>
+        LoadSavedEntities(world, savedScreenPath, JsonHelper.DefaultDocumentOptions, JsonHelper.DefaultSerializerOptions);
     private static void LoadSavedEntities(World world, string saveInfoPath, JsonDocumentOptions documentOptions, 
         JsonSerializerOptions serializerOptions)
     {
@@ -73,7 +74,7 @@ public static class SaveHelper
         for (var entId = 0; entId < entitiesCount; entId++)
             if(LoadEntityFromJsonElement(world, jsonEntities[entId], cTypes, cMappers, serializerOptions) == -1)
                 nullEntities.Add(entId);
-        
+
         // destroy every null entity
         for(var index = 0; index < nullEntities.Count; index++)
             world.DestroyEntity(nullEntities[index]);
@@ -102,13 +103,18 @@ public static class SaveHelper
     }
 
     public static LevelInfo GetLevelInfo(string saveFolderName) =>
-        JsonHelper.Deserialize<LevelInfo>(PathHelper.GetFullPathToSavedLevelInfo(saveFolderName));
+        JsonHelper.Deserialize<LevelInfo>(PathHelper.GetFullPathToLevelInfo(saveFolderName));
 
     public static void MakeSave(World world, LevelInfo currentLevel, string saveFolderName)
     {
         PathHelper.CreateSaveFolderIfNotExists(saveFolderName);
         
         PathHelper.WriteToLevelInfo(saveFolderName, JsonHelper.Serialize(currentLevel));
-        PathHelper.WriteToSaveInfo(saveFolderName, GetJsonStringFromEntities(world));
+        PathHelper.WriteToScreenInfo(saveFolderName, currentLevel ,GetJsonStringFromEntities(world));
+    }
+
+    public static void LoadSave(World world, LevelInfo currentLevel)
+    {
+        
     }
 }

@@ -32,7 +32,7 @@ public class World
         InitializeSystems(game, graphicsDevice, spriteBatch, config);
         // game.Components.Add(_World);
         InitializeComponentManager();
-        LoadSaveInfoFromFolder(saveFolderName);
+        LoadScreenInfo(saveFolderName);
         BoundTexturesToSpriteComponents(game.Content);
 
         Grid = GetGridPopulatedWithCurrentEntities(config);
@@ -63,15 +63,11 @@ public class World
             Grid.Populate(controllablePosition, ComponentManager.GetMapper<CSizePosition>().Components);
     }
 
-    private void LoadLevelInfoFromFolder(string saveFolderName)
-    {
+    private void LoadLevelInfoFromFolder(string saveFolderName) =>
         CurrentLevel = SaveHelper.GetLevelInfo(saveFolderName);
-    }
-    
-    private void LoadSaveInfoFromFolder(string saveFolderName)
-    {
-        SaveHelper.LoadSaveInfoWithDefaultOptions(_World, PathHelper.GetFullPathToSaveInfo(saveFolderName));
-    }
+
+    private void LoadScreenInfo(string saveFolderName) => 
+        SaveHelper.LoadSavedScreen(_World, PathHelper.GetFullPathToScreenInfo(saveFolderName, CurrentLevel));
 
     private WorldGrid GetGridPopulatedWithCurrentEntities(ConfigInfo config)
     {
@@ -81,7 +77,7 @@ public class World
     
 
     public void BoundTexturesToSpriteComponents(ContentManager contentManager) =>
-        ComponentRegistry.BindTexturesToSpriteComponents(ComponentManager, contentManager);
+        ComponentRegistry.BindComponentSources(ComponentManager, contentManager);
     
 
     private void InitializeComponentManager()
@@ -91,7 +87,7 @@ public class World
         ComponentRegistry.InitializeComponentMappers(ComponentManager);
     }
 
-    public void Save(string saveFolderName)
+    public void MakeSave(string saveFolderName)
     {
         SaveHelper.MakeSave(_World, CurrentLevel, saveFolderName);
     }

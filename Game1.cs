@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
+using Underall.Gameplay.Effects;
+using Underall.Gameplay.Interactions;
+using Underall.Gameplay.Sound;
 using Underall.Helpers;
 using Underall.MetaInfo;
 using Underall.Screens;
@@ -16,17 +20,22 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private ScreenManager _screenManager;
     private SpriteBatch _spriteBatch;
+    // it is VERY unwanted to use this, oftentimes you can get through without this
+    private GameTime ReflectedGameTime => ReflectionHelper.GetPrivateField<Game, GameTime>(this, "_gameTime");
     public ConfigInfo Config { get; private set; }
-    private string CurrentSave;
+    private string CurrentSave; // TODO: CHANGE THIS
 
-    public int timeDif = 5;
+    public int timeDif = 5; // TODO: ChANGE THIS
 
-    public World.World World;
-    public UserInterface UserInterface;
+    public World.World World { get; set; }
+    public UserInterface UserInterface { get; private set; }
+
+    #region Screens
     private ScGameplay ScGameplay { get; set; }
     private ScMenu ScMainMenu { get; set; }
     private ScMenu ScPauseMenu { get; set; }
     private Stack<GameScreen> ScreenStack { get; set; }
+    #endregion
 
     public Game1()
     {
@@ -44,6 +53,7 @@ public class Game1 : Game
         Config = config;
         _screenManager = new ScreenManager();
         ScreenStack = new Stack<GameScreen>();
+        InitializeSoundManager();
         InitializeUserInterface(config);
         LoadMainMenuScreen();
         // LoadPauseMenuScreen(); <-- that's just for fun and test x)
@@ -129,6 +139,9 @@ public class Game1 : Game
     private void InitializeGameplay(ConfigInfo config, string saveFolderName = null)
     {
         ScGameplay = new ScGameplay(this, _spriteBatch, config, saveFolderName);
+        InteractionManager.Initialize(World);
+        EffectManager.Initialize();
+        EffectManager.LoadSavedEffects(ReflectedGameTime, World.CurrentLevel.Effects);
     }
 
     private void InitializeMainMenu()
@@ -147,5 +160,20 @@ public class Game1 : Game
     {
         ScreenStack.Push(screen);
         _screenManager.LoadScreen(screen);
+    }
+
+    private void InitializeSoundManager()
+    {
+        SoundManager.Initialize(Content);
+    }
+
+    private void InitializeInteractionManager()
+    {
+        InteractionManager.Initialize(World);
+    }
+
+    private void InitializeEffectManager()
+    {
+        EffectManager.Initialize();
     }
 }

@@ -126,7 +126,7 @@ public class UserInterface
         SpriteBatch.Begin(SpriteSortMode.BackToFront);
         HealthBar.Draw();
         StaminaBar.Draw();
-        // SanityBar.Draw();
+        SanityBar.Draw();
         
         SpriteBatch.End();
     }
@@ -140,17 +140,17 @@ public class UserInterface
     private void InitializeGameplayStatBars(ConfigInfo config)
     {
         HealthBar = config.HealthBarBuilder
-            .AddStatInfo(ControllableBasicStats.Health)
+            .AddStatInfo(ControllableBasicStats["Health"])
             .AddSpriteBatch(SpriteBatch)
             .BindSource(ContentManager)
             .Build();
         SanityBar = config.SanityBarBuilder
-            .AddStatInfo(ControllableBasicStats.Sanity)
+            .AddStatInfo(ControllableBasicStats["Sanity"])
             .AddSpriteBatch(SpriteBatch)
             .BindSource(ContentManager)
             .Build();
         StaminaBar = config.StaminaBarBuilder
-            .AddStatInfo(ControllableBasicStats.Stamina)
+            .AddStatInfo(ControllableBasicStats["Stamina"])
             .AddSpriteBatch(SpriteBatch)
             .BindSource(ContentManager)
             .Build();

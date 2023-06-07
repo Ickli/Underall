@@ -16,7 +16,9 @@ public class StatInfo
     public float CurrentProportion { get; private set; }
 
     public event StatChangedNotification StatChanged;
-    
+
+    public void Add(int amount) => ChangeCurrent(Current + amount);
+
     public void ChangeCurrent(int current)
     {
         RawChangeCurrent(current);
